@@ -42,3 +42,13 @@ def test_cupon_vencido_lanza_error_de_cupon_invalido():
     # Act y Assert
     with pytest.raises(ValueError, match="cupon invalido"):
         cupon_da_envio_gratis(codigo, hoy)
+
+def test_sabanero10_con_subtotal_300000_da_30000():
+    # Arrange
+    codigo = "SABANERO10"
+    subtotal = 300_000
+    # Act
+    descuento = calcular_descuento_cupon(codigo, subtotal)
+    # Assert
+    assert descuento == 30_000
+    
