@@ -64,3 +64,20 @@ def test_con_subtotal_300000_se_aplica_solo_el_descuento_mayor():
     descuento = calcular_descuento_final(codigo, subtotal)
     # Assert
     assert descuento == 30_000
+
+def test_con_subtotal_500000_el_empate_no_suma_los_descuentos():
+    # Arrange
+    codigo = "SABANERO10"
+    subtotal = 500_000
+    # Act
+    descuento = calcular_descuento_final(codigo, subtotal)
+    # Assert
+    assert descuento == 50_000
+
+def test_calcular_descuento_cupon_inexistente_lanza_error():
+    # Arrange
+    codigo = "XYZ"
+    subtotal = 100_000
+    # Act y Assert
+    with pytest.raises(ValueError, match="cupon invalido"):
+        calcular_descuento_cupon(codigo, subtotal)
