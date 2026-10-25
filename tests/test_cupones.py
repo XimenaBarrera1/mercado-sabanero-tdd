@@ -26,3 +26,10 @@ def test_enviogratis_da_envio_gratis():
     envio_gratis = cupon_da_envio_gratis(codigo)
     # Assert
     assert envio_gratis is True
+
+def test_cupon_inexistente_lanza_error_de_cupon_invalido():
+    # Arrange
+    codigo = "XYZ"
+    # Act y Assert
+    with pytest.raises(ValueError, match="cupon invalido"):
+        cupon_da_envio_gratis(codigo)
