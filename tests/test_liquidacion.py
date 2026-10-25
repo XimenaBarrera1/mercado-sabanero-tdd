@@ -33,7 +33,7 @@ def test_liquidar_carrito_vacio_lanza_error():
     carrito = Carrito(Mock())
     # Act y Assert
     with pytest.raises(ValueError, match="carrito vacio"):
-        liquidar(carrito)
+        liquidar(carrito, "Sincelejo")
 
 def test_liquidar_el_ejemplo_de_la_guia_da_total_250515_y_250_puntos():
     # Arrange
