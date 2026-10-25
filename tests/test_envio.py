@@ -33,3 +33,12 @@ def test_envio_gratis_desde_150000_de_base(base, envio_esperado):
     envio = calcular_envio(municipio, base)
     # Assert
     assert envio == envio_esperado
+
+def test_cupon_envio_gratis_da_envio_cero_con_base_menor_a_150000():
+    # Arrange
+    municipio = "Sincelejo"
+    base = 119_000
+    # Act
+    envio = calcular_envio(municipio, base, envio_gratis_por_cupon=True)
+    # Assert
+    assert envio == 0
