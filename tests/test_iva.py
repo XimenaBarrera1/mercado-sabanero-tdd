@@ -58,3 +58,12 @@ def test_tarifa_de_iva_invalida_lanza_error():
     # Act y Assert
     with pytest.raises(ValueError):
         calcular_iva(valor, tarifa)
+
+
+def test_valor_negativo_lanza_error():
+    # Arrange
+    valor = -1
+    tarifa = 19
+    # Act y Assert
+    with pytest.raises(ValueError):
+        calcular_iva(valor, tarifa)
