@@ -21,3 +21,6 @@ class Carrito:
     def cantidad_de(self, producto):
         return self._items[producto.id]
 
+    def esta_vacio(self):
+        return not self._items
+
