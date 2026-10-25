@@ -30,5 +30,7 @@ def cupon_da_envio_gratis(codigo, hoy=None):
 
 def calcular_descuento_final(codigo, subtotal):
     descuento_volumen = calcular_descuento_volumen(subtotal)
+    if codigo is None:
+        return descuento_volumen
     descuento_cupon = calcular_descuento_cupon(codigo, subtotal)
     return max(descuento_volumen, descuento_cupon)
