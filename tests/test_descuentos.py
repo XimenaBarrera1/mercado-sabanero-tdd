@@ -24,3 +24,11 @@ def test_subtotal_499999_redondea_descuento_al_peso_mas_cercano():
     descuento = calcular_descuento_volumen(subtotal)
     # Assert
     assert descuento == 25_000
+
+def test_subtotal_500000_aplica_descuento_10_porciento():
+    # Arrange
+    subtotal = 500_000
+    # Act
+    descuento = calcular_descuento_volumen(subtotal)
+    # Assert
+    assert descuento == 50_000
