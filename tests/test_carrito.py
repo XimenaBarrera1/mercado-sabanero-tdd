@@ -41,3 +41,16 @@ def test_agregar_mas_unidades_que_el_stock_lanza_error_de_stock_insuficiente():
     # Act y Assert
     with pytest.raises(StockInsuficienteError):
         carrito.agregar(producto, 10)
+
+
+def test_agregar_el_mismo_producto_dos_veces_suma_las_cantidades():
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 10
+    producto = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    carrito = Carrito(inventario)
+    carrito.agregar(producto, 2)
+    # Act
+    carrito.agregar(producto, 3)
+    # Assert
+    assert carrito.cantidad_de(producto) == 5
