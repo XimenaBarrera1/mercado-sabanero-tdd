@@ -18,3 +18,14 @@ def test_iva_segun_tarifa_sobre_100000(tarifa, iva_esperado):
     iva = calcular_iva(valor, tarifa)
     # Assert
     assert iva == iva_esperado
+
+
+def test_iva_se_calcula_sobre_el_valor_con_descuento_aplicado():
+    # Arrange
+    valor = 180_000
+    tarifa = 19
+    porcentaje_descuento = 5
+    # Act
+    iva = calcular_iva(valor, tarifa, porcentaje_descuento)
+    # Assert
+    assert iva == 32_490
