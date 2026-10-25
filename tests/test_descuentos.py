@@ -8,3 +8,11 @@ def test_subtotal_199999_no_aplica_descuento():
     descuento = calcular_descuento_volumen(subtotal)
     # Assert
     assert descuento == 0
+
+def test_subtotal_200000_aplica_descuento_5_porciento():
+    # Arrange
+    subtotal = 200_000
+    # Act
+    descuento = calcular_descuento_volumen(subtotal)
+    # Assert
+    assert descuento == 10_000
