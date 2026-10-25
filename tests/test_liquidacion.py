@@ -1,4 +1,9 @@
-from mercado_sabanero.liquidacion import calcular_total
+from unittest.mock import Mock
+
+import pytest
+
+from mercado_sabanero.carrito import Carrito
+from mercado_sabanero.liquidacion import calcular_total, liquidar
 
 
 def test_total_es_subtotal_menos_descuento_mas_iva_mas_envio():
@@ -22,3 +27,10 @@ def test_total_resta_el_descuento_del_ejemplo_de_la_guia():
     total = calcular_total(subtotal, descuento, iva, envio)
     # Assert
     assert total == 250_515
+
+def test_liquidar_carrito_vacio_lanza_error():
+    # Arrange
+    carrito = Carrito(Mock())
+    # Act y Assert
+    with pytest.raises(ValueError, match="carrito vacio"):
+        liquidar(carrito)
