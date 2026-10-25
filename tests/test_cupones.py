@@ -81,3 +81,12 @@ def test_calcular_descuento_cupon_inexistente_lanza_error():
     # Act y Assert
     with pytest.raises(ValueError, match="cupon invalido"):
         calcular_descuento_cupon(codigo, subtotal)
+
+def test_sin_cupon_se_aplica_solo_el_descuento_por_volumen():
+    # Arrange
+    codigo = None
+    subtotal = 228_000
+    # Act
+    descuento = calcular_descuento_final(codigo, subtotal)
+    # Assert
+    assert descuento == 11_400
