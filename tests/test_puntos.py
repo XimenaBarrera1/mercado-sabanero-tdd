@@ -38,3 +38,14 @@ def test_cliente_oro_recibe_el_doble_de_puntos():
     puntos = calcular_puntos(total_sin_envio, categoria=categoria)
     # Assert
     assert puntos == 500
+
+
+def test_el_envio_no_suma_puntos():
+    # Arrange
+    total_con_envio = 127_000
+    envio = 8_000
+    total_sin_envio = total_con_envio - envio
+    # Act
+    puntos = calcular_puntos(total_sin_envio)
+    # Assert
+    assert puntos == 119
