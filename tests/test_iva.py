@@ -29,3 +29,13 @@ def test_iva_se_calcula_sobre_el_valor_con_descuento_aplicado():
     iva = calcular_iva(valor, tarifa, porcentaje_descuento)
     # Assert
     assert iva == 32_490
+
+
+def test_iva_con_decimales_se_redondea_al_peso_mas_cercano():
+    # Arrange
+    valor = 1_010
+    tarifa = 5
+    # Act
+    iva = calcular_iva(valor, tarifa)
+    # Assert
+    assert iva == 51
