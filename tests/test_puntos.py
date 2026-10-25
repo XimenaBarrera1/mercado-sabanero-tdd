@@ -28,3 +28,13 @@ def test_limites_de_puntos_por_cada_mil_pesos_completos(total_sin_envio, puntos_
     # Assert
     assert puntos == puntos_esperados
 
+
+
+def test_cliente_oro_recibe_el_doble_de_puntos():
+    # Arrange
+    total_sin_envio = 250_515
+    categoria = "ORO"
+    # Act
+    puntos = calcular_puntos(total_sin_envio, categoria=categoria)
+    # Assert
+    assert puntos == 500
