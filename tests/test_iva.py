@@ -49,3 +49,12 @@ def test_iva_de_un_valor_en_cero_es_cero():
     iva = calcular_iva(valor, tarifa)
     # Assert
     assert iva == 0
+
+
+def test_tarifa_de_iva_invalida_lanza_error():
+    # Arrange
+    valor = 100_000
+    tarifa = 10
+    # Act y Assert
+    with pytest.raises(ValueError):
+        calcular_iva(valor, tarifa)
