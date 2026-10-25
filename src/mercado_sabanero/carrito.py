@@ -5,6 +5,7 @@ class Carrito:
     def __init__(self, inventario):
         self._inventario = inventario
         self._items = {}
+        self._productos = {}
 
     def agregar(self, producto, cantidad):
         if cantidad < 1 or cantidad > 50:
@@ -17,6 +18,7 @@ class Carrito:
                 f"Stock insuficiente: se pidieron {cantidad} y hay {stock}"
             )
         self._items[producto.id] = self._items.get(producto.id, 0) + cantidad
+        self._productos[producto.id] = producto
 
     def cantidad_de(self, producto):
         return self._items[producto.id]
@@ -24,3 +26,8 @@ class Carrito:
     def esta_vacio(self):
         return not self._items
 
+    def lineas(self):
+        return [
+            (self._productos[id_producto], cantidad)
+            for id_producto, cantidad in self._items.items()
+        ]
