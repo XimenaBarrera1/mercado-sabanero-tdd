@@ -1,3 +1,4 @@
+from datetime import date
 import pytest
 from mercado_sabanero.cupones import calcular_descuento_cupon, cupon_da_envio_gratis
 
@@ -33,3 +34,11 @@ def test_cupon_inexistente_lanza_error_de_cupon_invalido():
     # Act y Assert
     with pytest.raises(ValueError, match="cupon invalido"):
         cupon_da_envio_gratis(codigo)
+
+def test_cupon_vencido_lanza_error_de_cupon_invalido():
+    # Arrange
+    codigo = "ENVIOGRATIS"
+    hoy = date(2099, 1, 1)
+    # Act y Assert
+    with pytest.raises(ValueError, match="cupon invalido"):
+        cupon_da_envio_gratis(codigo, hoy)
