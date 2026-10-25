@@ -1,3 +1,4 @@
+from datetime import date
 from unittest.mock import Mock
 
 import pytest
@@ -57,3 +58,15 @@ def test_liquidar_el_ejemplo_de_la_guia_da_total_250515_y_250_puntos():
         "total": 250_515,
         "puntos": 250,
     }
+
+def test_liquidar_con_enviogratis_vencido_lanza_error_de_cupon_invalido():
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 100
+    licuadora = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    carrito = Carrito(inventario)
+    carrito.agregar(licuadora, 1)
+    hoy = date(2027, 1, 1)
+    # Act y Assert
+    with pytest.raises(ValueError, match="cupon invalido"):
+        liquidar(carrito, "Sincelejo", codigo_cupon="ENVIOGRATIS", hoy=hoy)
