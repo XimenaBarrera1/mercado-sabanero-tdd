@@ -79,3 +79,17 @@ def test_agregar_consulta_el_inventario_una_vez_con_el_id_del_producto():
     carrito.agregar(producto, 1)
     # Assert
     inventario.stock_disponible.assert_called_once_with("LIC-01")
+
+def test_lineas_devuelve_cada_producto_con_su_cantidad():
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 10
+    licuadora = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    cafe = Producto(id="CAF-01", nombre="Cafe", precio=15_000, tarifa_iva=5)
+    carrito = Carrito(inventario)
+    carrito.agregar(licuadora, 1)
+    carrito.agregar(cafe, 2)
+    # Act
+    lineas = carrito.lineas()
+    # Assert
+    assert lineas == [(licuadora, 1), (cafe, 2)]
