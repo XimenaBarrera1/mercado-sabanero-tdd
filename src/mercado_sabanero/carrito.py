@@ -1,4 +1,4 @@
-﻿from mercado_sabanero.errores import CantidadInvalidaError
+﻿from mercado_sabanero.errores import CantidadInvalidaError, StockInsuficienteError
 
 
 class Carrito:
@@ -10,6 +10,11 @@ class Carrito:
         if cantidad < 1 or cantidad > 50:
             raise CantidadInvalidaError(
                 f"La cantidad debe estar entre 1 y 50, se recibió {cantidad}"
+            )
+        stock = self._inventario.stock_disponible(producto.id)
+        if stock < cantidad:
+            raise StockInsuficienteError(
+                f"Stock insuficiente: se pidieron {cantidad} y hay {stock}"
             )
         self._items[producto.id] = cantidad
 
