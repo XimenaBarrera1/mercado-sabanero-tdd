@@ -54,3 +54,28 @@ def test_agregar_el_mismo_producto_dos_veces_suma_las_cantidades():
     carrito.agregar(producto, 3)
     # Assert
     assert carrito.cantidad_de(producto) == 5
+
+
+@pytest.mark.parametrize("cantidad", [1, 25, 50])
+def test_agregar_cantidad_valida_queda_la_cantidad_pedida(cantidad):
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 100
+    producto = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    carrito = Carrito(inventario)
+    # Act
+    carrito.agregar(producto, cantidad)
+    # Assert
+    assert carrito.cantidad_de(producto) == cantidad
+
+
+def test_agregar_consulta_el_inventario_una_vez_con_el_id_del_producto():
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 10
+    producto = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    carrito = Carrito(inventario)
+    # Act
+    carrito.agregar(producto, 1)
+    # Assert
+    inventario.stock_disponible.assert_called_once_with("LIC-01")
