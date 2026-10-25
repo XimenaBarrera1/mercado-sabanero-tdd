@@ -15,6 +15,7 @@ def test_total_250515_acumula_250_puntos():
 @pytest.mark.parametrize(
     "total_sin_envio, puntos_esperados",
     [
+        (0, 0),
         (999, 0),
         (1_000, 1),
         (1_999, 1),
@@ -49,3 +50,4 @@ def test_el_envio_no_suma_puntos():
     puntos = calcular_puntos(total_sin_envio)
     # Assert
     assert puntos == 119
+
