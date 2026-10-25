@@ -51,3 +51,13 @@ def test_el_envio_no_suma_puntos():
     # Assert
     assert puntos == 119
 
+
+
+def test_cliente_oro_trunca_los_puntos_antes_de_duplicar():
+    # Arrange
+    total_sin_envio = 1_999
+    categoria = "ORO"
+    # Act
+    puntos = calcular_puntos(total_sin_envio, categoria=categoria)
+    # Assert
+    assert puntos == 2
