@@ -1,3 +1,7 @@
+from decimal import Decimal
+
+from mercado_sabanero.redondeo import redondear
+
 UMBRAL_DESCUENTO_5 = 200_000
 UMBRAL_DESCUENTO_10 = 500_000
 PORCENTAJE_DESCUENTO_5 = 5
@@ -15,5 +19,4 @@ def calcular_descuento_volumen(subtotal):
 
 
 def _porcentaje(valor, porcentaje):
-    # Redondeo half-up con enteros: suma la mitad del divisor antes de dividir
-    return (valor * porcentaje + 50) // 100
+    return redondear(Decimal(valor) * porcentaje / 100)
