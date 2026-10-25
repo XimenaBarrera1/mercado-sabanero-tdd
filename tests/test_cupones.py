@@ -1,6 +1,10 @@
 from datetime import date
 import pytest
-from mercado_sabanero.cupones import calcular_descuento_cupon, cupon_da_envio_gratis
+from mercado_sabanero.cupones import (
+    calcular_descuento_cupon,
+    calcular_descuento_final,
+    cupon_da_envio_gratis,
+)
 
 
 def test_sabanero10_con_subtotal_50000_da_descuento_10_porciento():
@@ -51,4 +55,12 @@ def test_sabanero10_con_subtotal_300000_da_30000():
     descuento = calcular_descuento_cupon(codigo, subtotal)
     # Assert
     assert descuento == 30_000
-    
+
+def test_con_subtotal_300000_se_aplica_solo_el_descuento_mayor():
+    # Arrange
+    codigo = "SABANERO10"
+    subtotal = 300_000
+    # Act
+    descuento = calcular_descuento_final(codigo, subtotal)
+    # Assert
+    assert descuento == 30_000
