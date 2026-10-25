@@ -90,3 +90,12 @@ def test_sin_cupon_se_aplica_solo_el_descuento_por_volumen():
     descuento = calcular_descuento_final(codigo, subtotal)
     # Assert
     assert descuento == 11_400
+
+def test_enviogratis_aplica_solo_el_descuento_por_volumen():
+    # Arrange
+    codigo = "ENVIOGRATIS"
+    subtotal = 228_000
+    # Act
+    descuento = calcular_descuento_final(codigo, subtotal)
+    # Assert
+    assert descuento == 11_400
