@@ -16,7 +16,8 @@ class Carrito:
             raise StockInsuficienteError(
                 f"Stock insuficiente: se pidieron {cantidad} y hay {stock}"
             )
-        self._items[producto.id] = cantidad
+        self._items[producto.id] = self._items.get(producto.id, 0) + cantidad
 
     def cantidad_de(self, producto):
         return self._items[producto.id]
+
