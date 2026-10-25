@@ -39,3 +39,13 @@ def test_iva_con_decimales_se_redondea_al_peso_mas_cercano():
     iva = calcular_iva(valor, tarifa)
     # Assert
     assert iva == 51
+
+
+def test_iva_de_un_valor_en_cero_es_cero():
+    # Arrange
+    valor = 0
+    tarifa = 19
+    # Act
+    iva = calcular_iva(valor, tarifa)
+    # Assert
+    assert iva == 0
