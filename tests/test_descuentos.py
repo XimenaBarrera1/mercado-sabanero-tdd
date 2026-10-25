@@ -1,3 +1,4 @@
+import pytest
 from mercado_sabanero.descuentos import calcular_descuento_volumen
 
 
@@ -32,3 +33,10 @@ def test_subtotal_500000_aplica_descuento_10_porciento():
     descuento = calcular_descuento_volumen(subtotal)
     # Assert
     assert descuento == 50_000
+
+def test_subtotal_negativo_lanza_error():
+    # Arrange
+    subtotal = -1
+    # Act y Assert
+    with pytest.raises(ValueError):
+        calcular_descuento_volumen(subtotal)
