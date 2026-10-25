@@ -9,6 +9,8 @@ from mercado_sabanero.descuentos import calcular_descuento_volumen
 FECHA_VENCIMIENTO_ENVIOGRATIS = date(2026, 12, 31)
 
 def calcular_descuento_cupon(codigo, subtotal):
+    if codigo != "SABANERO10":
+        raise ValueError("cupon invalido")
     if subtotal < 50_000:
         raise ValueError("El subtotal no alcanza el minimo del cupon")
     return redondear(Decimal(subtotal) * 10 / 100)
