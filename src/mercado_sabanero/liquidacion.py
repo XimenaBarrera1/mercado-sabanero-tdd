@@ -3,10 +3,12 @@ from decimal import Decimal
 from mercado_sabanero.cupones import (
     CUPON_ENVIO_GRATIS,
     calcular_descuento_final,
+    cupon_da_envio_gratis,
 )
 from mercado_sabanero.envio import calcular_envio
 from mercado_sabanero.iva import calcular_iva
 from mercado_sabanero.puntos import calcular_puntos
+
 
 MENSAJE_CARRITO_VACIO = "carrito vacio"
 
@@ -26,9 +28,12 @@ def _calcular_iva_total(lineas, porcentaje_descuento):
     )
 
 
-def liquidar(carrito, municipio, categoria="ESTANDAR", codigo_cupon=None):
+def liquidar(carrito, municipio, categoria="ESTANDAR", codigo_cupon=None, hoy=None):
     if carrito.esta_vacio():
         raise ValueError(MENSAJE_CARRITO_VACIO)
+
+    if codigo_cupon == CUPON_ENVIO_GRATIS:
+        cupon_da_envio_gratis(codigo_cupon, hoy)
 
     lineas = carrito.lineas()
     subtotal = sum(producto.precio * cantidad for producto, cantidad in lineas)
