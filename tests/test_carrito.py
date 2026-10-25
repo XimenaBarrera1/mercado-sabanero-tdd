@@ -3,7 +3,7 @@
 import pytest
 
 from mercado_sabanero.carrito import Carrito
-from mercado_sabanero.errores import CantidadInvalidaError
+from mercado_sabanero.errores import CantidadInvalidaError, StockInsuficienteError
 from mercado_sabanero.producto import Producto
 
 
@@ -29,3 +29,15 @@ def test_agregar_cantidad_fuera_de_rango_lanza_error(cantidad):
     # Act y Assert
     with pytest.raises(CantidadInvalidaError):
         carrito.agregar(producto, cantidad)
+
+
+
+def test_agregar_mas_unidades_que_el_stock_lanza_error_de_stock_insuficiente():
+    # Arrange
+    inventario = Mock()
+    inventario.stock_disponible.return_value = 5
+    producto = Producto(id="LIC-01", nombre="Licuadora", precio=180_000, tarifa_iva=19)
+    carrito = Carrito(inventario)
+    # Act y Assert
+    with pytest.raises(StockInsuficienteError):
+        carrito.agregar(producto, 10)
